@@ -108,7 +108,28 @@ public class IntSorting {
     *           array to be sorted
     */
    public static void binaryInsertionSort(int[] a) {
-      // TODO!!! Your method here!
+      if (a.length < 2)
+         return;
+      for (int i = 1; i < a.length; i++) {
+         int lowIndex = 0;
+         int highIndex = i;
+         int current = a[i];
+
+         //while loop for binary search
+         while(lowIndex < highIndex) {
+            int middle = lowIndex + (highIndex - lowIndex) / 2; //avoid int overflow
+            if (current >= a[middle]) {
+               lowIndex = middle+1;
+            }
+            else {
+               highIndex = middle;
+            }
+         }
+         //replace elements of array
+         System.arraycopy(a, lowIndex, a, lowIndex+1, i-lowIndex);
+         a[lowIndex] = current;
+      }
+      //https://stackoverflow.com/questions/16953009/implementing-a-binary-insertion-sort-using-binary-search-in-java
    }
 
    /**
